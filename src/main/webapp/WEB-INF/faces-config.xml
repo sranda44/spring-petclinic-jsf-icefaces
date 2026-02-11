@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+              http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd"
+              version="1.2">
+
+    <!-- Application Configuration -->
+    <application>
+        <message-bundle>messages</message-bundle>
+        <default-locale>en</default-locale>
+        <supported-locale>en</supported-locale>
+        <supported-locale>es</supported-locale>
+        <supported-locale>de</supported-locale>
+    </application>
+
+    <!-- Managed Beans -->
+    <managed-bean>
+        <managed-bean-name>petListBean</managed-bean-name>
+        <managed-bean-class>com.example.petclinic.jsf.bean.PetListBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>petDetailBean</managed-bean-name>
+        <managed-bean-class>com.example.petclinic.jsf.bean.PetDetailBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>ownerListBean</managed-bean-name>
+        <managed-bean-class>com.example.petclinic.jsf.bean.OwnerListBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>ownerDetailBean</managed-bean-name>
+        <managed-bean-class>com.example.petclinic.jsf.bean.OwnerDetailBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>visitBean</managed-bean-name>
+        <managed-bean-class>com.example.petclinic.jsf.bean.VisitBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <!-- Navigation Rules -->
+    <navigation-rule>
+        <from-view-id>/index.jsf</from-view-id>
+        <navigation-case>
+            <from-outcome>listPets</from-outcome>
+            <to-view-id>/petclinic/petList.jsf</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>listOwners</from-outcome>
+            <to-view-id>/petclinic/ownerList.jsf</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>listVets</from-outcome>
+            <to-view-id>/petclinic/vetList.jsf</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/petclinic/petList.jsf</from-view-id>
+        <navigation-case>
+            <from-outcome>viewDetail</from-outcome>
+            <to-view-id>/petclinic/petDetail.jsf</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>addNew</from-outcome>
+            <to-view-id>/petclinic/petNew.jsf</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/petclinic/ownerList.jsf</from-view-id>
+        <navigation-case>
+            <from-outcome>viewDetail</from-outcome>
+            <to-view-id>/petclinic/ownerDetail.jsf</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>addNew</from-outcome>
+            <to-view-id>/petclinic/ownerNew.jsf</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/petclinic/ownerDetail.jsf</from-view-id>
+        <navigation-case>
+            <from-outcome>addVisit</from-outcome>
+            <to-view-id>/petclinic/visitNew.jsf</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <!-- Converters -->
+    <converter>
+        <converter-id>petConverter</converter-id>
+        <converter-class>com.example.petclinic.jsf.converter.PetConverter</converter-class>
+    </converter>
+
+    <converter>
+        <converter-id>ownerConverter</converter-id>
+        <converter-class>com.example.petclinic.jsf.converter.OwnerConverter</converter-class>
+    </converter>
+
+    <!-- Validators -->
+    <validator>
+        <validator-id>emailValidator</validator-id>
+        <validator-class>com.example.petclinic.jsf.validator.EmailValidator</validator-class>
+    </validator>
+
+</faces-config>

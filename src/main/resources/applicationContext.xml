@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.springframework.org/schema/tx 
+       http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+       http://www.springframework.org/schema/context 
+       http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+    <!-- Property Placeholder Configurer -->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:jdbc.properties"/>
+    </bean>
+
+    <!-- H2 Data Source Configuration -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="initialSize" value="${jdbc.initialSize}"/>
+        <property name="maxActive" value="${jdbc.maxActive}"/>
+        <property name="maxIdle" value="${jdbc.maxIdle}"/>
+        <property name="maxWait" value="${jdbc.maxWait}"/>
+        <property name="testOnBorrow" value="true"/>
+        <property name="validationQuery" value="SELECT 1"/>
+        <property name="logAbandoned" value="true"/>
+        <property name="removeAbandoned" value="true"/>
+        <property name="removeAbandonedTimeout" value="60"/>
+    </bean>
+
+    <!-- Hibernate Session Factory with Java 8 Support -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mappingResources">
+            <list>
+                <value>com/example/petclinic/domain/Owner.hbm.xml</value>
+                <value>com/example/petclinic/domain/Pet.hbm.xml</value>
+                <value>com/example/petclinic/domain/PetType.hbm.xml</value>
+                <value>com/example/petclinic/domain/Specialty.hbm.xml</value>
+                <value>com/example/petclinic/domain/Vet.hbm.xml</value>
+                <value>com/example/petclinic/domain/Visit.hbm.xml</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
+                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.generate_statistics">false</prop>
+                <prop key="hibernate.jdbc.batch_size">20</prop>
+                <prop key="hibernate.use_outer_join">true</prop>
+                <prop key="hibernate.jdbc.use_scrollable_resultset">true</prop>
+                <prop key="hibernate.jdbc.time_zone">UTC</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- Transaction Manager -->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <!-- Enable Transaction Annotations -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!-- DAO Beans -->
+    <bean id="ownerDao" class="com.example.petclinic.dao.hibernate.HibernateOwnerDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="petDao" class="com.example.petclinic.dao.hibernate.HibernatePetDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="vetDao" class="com.example.petclinic.dao.hibernate.HibernateVetDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="visitDao" class="com.example.petclinic.dao.hibernate.HibernateVisitDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="petTypeDao" class="com.example.petclinic.dao.hibernate.HibernatePetTypeDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="specialtyDao" class="com.example.petclinic.dao.hibernate.HibernateSpecialtyDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <!-- Service Beans -->
+    <bean id="clinicService" class="com.example.petclinic.service.ClinicService">
+        <property name="ownerDao" ref="ownerDao"/>
+        <property name="petDao" ref="petDao"/>
+        <property name="vetDao" ref="vetDao"/>
+        <property name="visitDao" ref="visitDao"/>
+        <property name="petTypeDao" ref="petTypeDao"/>
+        <property name="specialtyDao" ref="specialtyDao"/>
+    </bean>
+
+    <!-- JSF Spring Integration -->
+    <bean id="springBeanFacesELResolver" class="org.springframework.web.jsf.el.SpringBeanFacesELResolver"/>
+
+</beans>

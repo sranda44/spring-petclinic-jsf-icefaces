@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<weblogic-web-app xmlns="http://www.bea.com/ns/weblogic/weblogic-web-app"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.bea.com/ns/weblogic/weblogic-web-app 
+                   http://www.bea.com/ns/weblogic/weblogic-web-app/1.4/weblogic-web-app.xsd">
+
+    <!-- Container Configuration -->
+    <container-descriptor>
+        <prefer-web-inf-classes>false</prefer-web-inf-classes>
+        <check-servlet-context>false</check-servlet-context>
+        <jsp-descriptor>
+            <keepgenerated>false</keepgenerated>
+            <page-check-seconds>-1</page-check-seconds>
+            <encoding>UTF-8</encoding>
+        </jsp-descriptor>
+    </container-descriptor>
+
+    <!-- Application Context Root -->
+    <context-root>/petclinic</context-root>
+
+    <!-- Session Configuration -->
+    <session-descriptor>
+        <timeout-secs>1800</timeout-secs>
+        <persistent-store-connection-pool>wl_default_cxn_pool</persistent-store-connection-pool>
+        <cookie-path>/</cookie-path>
+        <cookie-secure>false</cookie-secure>
+        <cookie-http-only>true</cookie-http-only>
+    </session-descriptor>
+
+    <!-- Fast Swap Configuration (disable in production) -->
+    <fast-swap>
+        <enabled>false</enabled>
+    </fast-swap>
+
+</weblogic-web-app>
