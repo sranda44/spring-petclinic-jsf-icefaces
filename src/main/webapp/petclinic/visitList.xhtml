@@ -1,0 +1,34 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ice="http://www.icesoft.com/icefaces">
+<h:head>
+    <title>Visit List</title>
+    <h:outputStylesheet name="css/styles.css"/>
+</h:head>
+<h:body>
+    <h:form>
+        <h:panelGrid columns="2">
+            <h:outputText value="Visits:"/>
+            <h:dataTable value="#{visitBean.visits}" var="visit">
+                <h:column>
+                    <f:facet name="header">Date</f:facet>
+                    <h:outputText value="#{visit.date}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Description</f:facet>
+                    <h:outputText value="#{visit.description}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Pet</f:facet>
+                    <h:outputText value="#{visit.pet.name}"/>
+                </h:column>
+                <h:column>
+                    <h:commandLink value="Edit" action="#{visitBean.editVisit(visit)}"/>
+                </h:column>
+            </h:dataTable>
+        </h:panelGrid>
+        <h:commandButton value="New Visit" action="visitNew"/>
+    </h:form>
+</h:body>
+</html>

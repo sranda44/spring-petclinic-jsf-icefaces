@@ -1,0 +1,32 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ice="http://www.icesoft.com/icefaces">
+<h:head>
+    <title>Create New Visit</title>
+    <h:outputStylesheet name="css/styles.css"/>
+</h:head>
+<h:body>
+    <h:form>
+        <h:panelGrid columns="2">
+            <h:outputLabel for="pet" value="Pet:" />
+            <h:selectOneMenu id="pet" value="#{visitBean.pet}">
+                <f:selectItems value="#{visitBean.pets}" var="pet" itemValue="#{pet}" itemLabel="#{pet.name}" />
+            </h:selectOneMenu>
+
+            <h:outputLabel for="date" value="Date:" />
+            <h:inputText id="date" value="#{visitBean.visit.date}" required="true">
+                <f:convertDateTime pattern="yyyy-MM-dd" />
+            </h:inputText>
+
+            <h:outputLabel for="description" value="Description:" />
+            <h:inputTextarea id="description" value="#{visitBean.visit.description}" required="true" />
+
+            <h:outputLabel />
+            <h:commandButton value="Create Visit" action="#{visitBean.createVisit}" />
+        </h:panelGrid>
+        
+        <h:messages globalOnly="true" />
+    </h:form>
+</h:body>
+</html>

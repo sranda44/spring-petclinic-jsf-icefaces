@@ -24,3 +24,101 @@ A modern Java 8 implementation of the classic Spring Pet Clinic application usin
 - **Localization** - Multi-language support (English, Spanish, German)
 
 ## Project Structure
+spring-petclinic-jsf-icefaces/
+├── pom.xml
+├── README.md
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── com/example/petclinic/
+│   │   │       ├── domain/
+│   │   │       │   ├── Owner.java
+│   │   │       │   ├── Pet.java
+│   │   │       │   ├── PetType.java
+│   │   │       │   ├── Specialty.java
+│   │   │       │   ├── Vet.java
+│   │   │       │   ├── Visit.java
+│   │   │       │   ├── Owner.hbm.xml
+│   │   │       │   ├── Pet.hbm.xml
+│   │   │       │   ├── PetType.hbm.xml
+│   │   │       │   ├── Specialty.hbm.xml
+│   │   │       │   ├── Vet.hbm.xml
+│   │   │       │   └── Visit.hbm.xml
+│   │   │       ├── dao/
+│   │   │       │   ├── OwnerDao.java
+│   │   │       │   ├── PetDao.java
+│   │   │       │   ├── PetTypeDao.java
+│   │   │       │   ├── SpecialtyDao.java
+│   │   │       │   ├── VetDao.java
+│   │   │       │   ├── VisitDao.java
+│   │   │       │   └── hibernate/
+│   │   │       │       ├── HibernateOwnerDao.java
+│   │   │       │       ├── HibernatePetDao.java
+│   │   │       │       ├── HibernatePetTypeDao.java
+│   │   │       │       ├── HibernateSpecialtyDao.java
+│   │   │       │       ├── HibernateVetDao.java
+│   │   │       │       └── HibernateVisitDao.java
+│   │   │       ├── service/
+│   │   │       │   └── ClinicService.java
+│   │   │       └── jsf/
+│   │   │           ├── bean/
+│   │   │           │   ├── OwnerListBean.java
+│   │   │           │   ├── OwnerDetailBean.java
+│   │   │           │   ├── PetListBean.java
+│   │   │           │   ├── PetDetailBean.java
+│   │   │           │   └── VisitBean.java
+│   │   │           ├── converter/
+│   │   │           │   ├── OwnerConverter.java
+│   │   │           │   └── PetConverter.java
+│   │   │           └── validator/
+│   │   │               └── EmailValidator.java
+│   │   ├── resources/
+│   │   │   ├── applicationContext.xml
+│   │   │   ├── jdbc.properties
+│   │   │   ├── log4j.xml
+│   │   │   ├── messages.properties
+│   │   │   ├── messages_es.properties
+│   │   │   ├── messages_de.properties
+│   │   │   └── db/
+│   │   │       └── h2/
+│   │   │           ├── schema.sql
+│   │   │           └── data.sql
+│   │   └── webapp/
+│   │       ├── index.jsp
+│   │       ├── WEB-INF/
+│   │       │   ├── web.xml
+│   │       │   ├── faces-config.xml
+│   │       │   ├── weblogic.xml
+│   │       │   └── templates/
+│   │       │       ├── header.xhtml
+│   │       │       ├── footer.xhtml
+│   │       │       └── layout.xhtml
+│   │       └── petclinic/
+│   │           ├── index.xhtml
+│   │           ├── ownerList.xhtml
+│   │           ├── ownerDetail.xhtml
+│   │           ├── ownerNew.xhtml
+│   │           ├── petList.xhtml
+│   │           ├── petDetail.xhtml
+│   │           ├── petNew.xhtml
+│   │           ├── visitList.xhtml
+│   │           ├── visitNew.xhtml
+│   │           ├── vetList.xhtml
+│   │           └── css/
+│   │               └── styles.css
+│   └── test/
+│       ├── java/
+│       │   └── com/example/petclinic/
+│       │       ├── service/
+│       │       │   └── ClinicServiceTest.java
+│       │       ├── dao/
+│       │       │   └── OwnerDaoTest.java
+│       │       └── jsf/
+│       │           └── bean/
+│       │               └── OwnerListBeanTest.java
+│       └── resources/
+│           ├── applicationContext-test.xml
+│           └── db/
+│               └── h2/
+│                   └── schema-test.sql
+└── .gitignore

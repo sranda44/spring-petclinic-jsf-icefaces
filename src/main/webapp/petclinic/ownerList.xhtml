@@ -1,0 +1,30 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ice="http://www.icesoft.com/icefaces">
+<h:head>
+    <title>Owner List</title>
+    <h:outputStylesheet name="css/styles.css"/>
+</h:head>
+<h:body>
+    <h:form>
+        <h:panelGrid columns="2">
+            <h:outputLabel value="Owners:" for="ownerList"/>
+            <h:dataTable id="ownerList" value="#{ownerListBean.owners}" var="owner">
+                <h:column>
+                    <f:facet name="header">First Name</f:facet>
+                    #{owner.firstName}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Last Name</f:facet>
+                    #{owner.lastName}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Details</f:facet>
+                    <h:commandLink value="View" action="#{ownerListBean.viewOwner(owner.id)}"/>
+                </h:column>
+            </h:dataTable>
+        </h:panelGrid>
+    </h:form>
+</h:body>
+</html>

@@ -1,0 +1,34 @@
+<applicationContext xmlns="http://www.springframework.org/schema/beans"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://www.springframework.org/schema/beans
+                    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="facesContext" class="org.springframework.web.jsf.FacesContextUtils" />
+
+    <bean id="ownerListBean" class="com.example.petclinic.jsf.bean.OwnerListBean">
+        <property name="clinicService" ref="clinicService" />
+    </bean>
+
+    <bean id="ownerDetailBean" class="com.example.petclinic.jsf.bean.OwnerDetailBean">
+        <property name="clinicService" ref="clinicService" />
+    </bean>
+
+    <bean id="petListBean" class="com.example.petclinic.jsf.bean.PetListBean">
+        <property name="clinicService" ref="clinicService" />
+    </bean>
+
+    <bean id="petDetailBean" class="com.example.petclinic.jsf.bean.PetDetailBean">
+        <property name="clinicService" ref="clinicService" />
+    </bean>
+
+    <bean id="visitBean" class="com.example.petclinic.jsf.bean.VisitBean">
+        <property name="clinicService" ref="clinicService" />
+    </bean>
+
+    <bean id="ownerConverter" class="com.example.petclinic.jsf.converter.OwnerConverter" />
+
+    <bean id="petConverter" class="com.example.petclinic.jsf.converter.PetConverter" />
+
+    <bean id="emailValidator" class="com.example.petclinic.jsf.validator.EmailValidator" />
+
+</applicationContext>

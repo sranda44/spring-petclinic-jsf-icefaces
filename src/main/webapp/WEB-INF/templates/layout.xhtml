@@ -1,0 +1,19 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <title>Spring Pet Clinic</title>
+    <h:outputStylesheet name="css/styles.css" />
+</h:head>
+
+<h:body>
+    <h:form>
+        <h:panelGroup layout="block">
+            <ui:include src="header.xhtml" />
+            <ui:include src="#{view.viewId}" />
+            <ui:include src="footer.xhtml" />
+        </h:panelGroup>
+    </h:form>
+</h:body>
+</html>

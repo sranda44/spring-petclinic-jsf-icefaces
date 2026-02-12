@@ -1,0 +1,45 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/">
+
+<h:head>
+    <title>Veterinarians List</title>
+    <h:outputStylesheet name="css/styles.css"/>
+</h:head>
+
+<h:body>
+    <h:form>
+        <h:panelGrid columns="2">
+            <h:outputText value="Veterinarians:" styleClass="header"/>
+            <h:outputText value="#{clinicService.vets.size()}" styleClass="header"/>
+        </h:panelGrid>
+
+        <h:dataTable value="#{clinicService.vets}" var="vet">
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="First Name"/>
+                </f:facet>
+                <h:outputText value="#{vet.firstName}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Last Name"/>
+                </f:facet>
+                <h:outputText value="#{vet.lastName}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Specialties"/>
+                </f:facet>
+                <h:outputText value="#{vet.specialties}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Details"/>
+                </f:facet>
+                <h:commandLink value="View" action="#{visitBean.viewVet(vet.id)}"/>
+            </h:column>
+        </h:dataTable>
+    </h:form>
+</h:body>
+</html>

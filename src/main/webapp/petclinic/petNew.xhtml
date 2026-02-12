@@ -1,0 +1,35 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/">
+
+<h:head>
+    <title>New Pet</title>
+</h:head>
+<h:body>
+    <h:form>
+        <h:panelGrid columns="2">
+            <h:outputLabel for="name" value="Pet Name:" />
+            <h:inputText id="name" value="#{petDetailBean.pet.name}" required="true" />
+
+            <h:outputLabel for="type" value="Pet Type:" />
+            <h:selectOneMenu id="type" value="#{petDetailBean.pet.type}" required="true">
+                <f:selectItems value="#{petDetailBean.petTypes}" var="type" itemValue="#{type}" itemLabel="#{type.name}" />
+            </h:selectOneMenu>
+
+            <h:outputLabel for="owner" value="Owner:" />
+            <h:selectOneMenu id="owner" value="#{petDetailBean.pet.owner}" required="true">
+                <f:selectItems value="#{petDetailBean.owners}" var="owner" itemValue="#{owner}" itemLabel="#{owner.firstName} #{owner.lastName}" />
+            </h:selectOneMenu>
+
+            <h:outputLabel for="birthDate" value="Birth Date:" />
+            <h:inputText id="birthDate" value="#{petDetailBean.pet.birthDate}" required="true" />
+
+            <h:outputLabel for="description" value="Description:" />
+            <h:inputTextarea id="description" value="#{petDetailBean.pet.description}" />
+
+            <h:outputLabel for="submit" value="" />
+            <h:commandButton value="Save" action="#{petDetailBean.save}" />
+        </h:panelGrid>
+    </h:form>
+</h:body>
+</html>

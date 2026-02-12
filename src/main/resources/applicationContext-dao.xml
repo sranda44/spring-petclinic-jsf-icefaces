@@ -1,0 +1,30 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="ownerDao" class="com.example.petclinic.dao.hibernate.HibernateOwnerDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="petDao" class="com.example.petclinic.dao.hibernate.HibernatePetDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="petTypeDao" class="com.example.petclinic.dao.hibernate.HibernatePetTypeDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="specialtyDao" class="com.example.petclinic.dao.hibernate.HibernateSpecialtyDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="vetDao" class="com.example.petclinic.dao.hibernate.HibernateVetDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="visitDao" class="com.example.petclinic.dao.hibernate.HibernateVisitDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+</beans>

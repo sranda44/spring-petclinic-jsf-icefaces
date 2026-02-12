@@ -1,45 +1,36 @@
 package com.example.petclinic.domain;
 
-import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
-/**
- * Domain class for Pet - Java 8 compatible
- * Uses LocalDate for birth dates and LocalDateTime for timestamps
- */
-public class Pet implements Serializable {
-    
-    private static final long serialVersionUID = 1L;
-    
-    private Integer id;
+@Entity
+@Table(name = "pets")
+public class Pet {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "name")
     private String name;
-    private LocalDate birthDate;
+
+    @ManyToOne
+    @JoinColumn(name = "type_id")
     private PetType type;
+
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
     private Owner owner;
-    private Collection<Visit> visits;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
 
-    public Pet() {
-        this.visits = new ArrayList<>();
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
-    }
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pet")
+    private Set<Visit> visits = new HashSet<>();
 
-    public Pet(String name) {
-        this();
-        this.name = name;
-    }
-
-    // Getters and Setters
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -49,14 +40,6 @@ public class Pet implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
     }
 
     public PetType getType() {
@@ -75,37 +58,16 @@ public class Pet implements Serializable {
         this.owner = owner;
     }
 
-    public Collection<Visit> getVisits() {
+    public Set<Visit> getVisits() {
         return visits;
     }
 
-    public void setVisits(Collection<Visit> visits) {
+    public void setVisits(Set<Visit> visits) {
         this.visits = visits;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    @Override
-    public String toString() {
-        return "Pet{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", birthDate=" + birthDate +
-                ", type=" + (type != null ? type.getName() : "unknown") +
-                '}';
+    public static Object findByOwnerId(Long valueOf) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'findByOwnerId'");
     }
 }

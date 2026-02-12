@@ -1,49 +1,27 @@
 package com.example.petclinic.domain;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
-/**
- * Domain class for Visit - Java 8 compatible
- * Uses LocalDateTime for visit date/time tracking
- */
-public class Visit implements Serializable {
-    
-    private static final long serialVersionUID = 1L;
-    
-    private Integer id;
-    private Pet pet;
-    private LocalDateTime visitDate;
+public class Visit {
+    private Long id;
+    private Date date;
     private String description;
-    private LocalDateTime createdAt;
+    private Pet pet;
 
-    public Visit() {
-        this.createdAt = LocalDateTime.now();
-    }
-
-    // Getters and Setters
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Pet getPet() {
-        return pet;
+    public Date getDate() {
+        return date;
     }
 
-    public void setPet(Pet pet) {
-        this.pet = pet;
-    }
-
-    public LocalDateTime getVisitDate() {
-        return visitDate;
-    }
-
-    public void setVisitDate(LocalDateTime visitDate) {
-        this.visitDate = visitDate;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public String getDescription() {
@@ -54,20 +32,11 @@ public class Visit implements Serializable {
         this.description = description;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
+    public Pet getPet() {
+        return pet;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    @Override
-    public String toString() {
-        return "Visit{" +
-                "id=" + id +
-                ", visitDate=" + visitDate +
-                ", description='" + description + '\'' +
-                '}';
+    public void setPet(Pet pet) {
+        this.pet = pet;
     }
 }

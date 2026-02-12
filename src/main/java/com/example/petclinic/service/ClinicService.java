@@ -3,32 +3,49 @@ package com.example.petclinic.service;
 import com.example.petclinic.dao.OwnerDao;
 import com.example.petclinic.dao.PetDao;
 import com.example.petclinic.dao.PetTypeDao;
-import com.example.petclinic.dao.VisitDao;
+import com.example.petclinic.dao.SpecialtyDao;
 import com.example.petclinic.dao.VetDao;
-import com.example.petclinic.domain.*;
-import org.springframework.transaction.annotation.Transactional;
+import com.example.petclinic.dao.VisitDao;
+import com.example.petclinic.domain.Owner;
+import com.example.petclinic.domain.Pet;
+import com.example.petclinic.domain.PetType;
+import com.example.petclinic.domain.Specialty;
+import com.example.petclinic.domain.Vet;
+import com.example.petclinic.domain.Visit;
 
-import java.util.Collection;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+// import org.springframework.transaction.annotation.Transactional;
 
-/**
- * Business service layer for Pet Clinic operations
- * Java 8 compatible with lambda support
- */
-@Transactional
+import java.util.List;
+
+@Service
+// @Transactional
 public class ClinicService {
 
-    private OwnerDao ownerDao;
-    private PetDao petDao;
-    private VetDao vetDao;
-    private VisitDao visitDao;
-    private PetTypeDao petTypeDao;
+    private final OwnerDao ownerDao;
+    private final PetDao petDao;
+    private final PetTypeDao petTypeDao;
+    private final SpecialtyDao specialtyDao;
+    private final VetDao vetDao;
+    private final VisitDao visitDao;
 
-    // Owner operations
-    public Collection<Owner> findAllOwners() {
+    @Autowired
+    public ClinicService(OwnerDao ownerDao, PetDao petDao, PetTypeDao petTypeDao,
+                         SpecialtyDao specialtyDao, VetDao vetDao, VisitDao visitDao) {
+        this.ownerDao = ownerDao;
+        this.petDao = petDao;
+        this.petTypeDao = petTypeDao;
+        this.specialtyDao = specialtyDao;
+        this.vetDao = vetDao;
+        this.visitDao = visitDao;
+    }
+
+    public List<Owner> findAllOwners() {
         return ownerDao.findAll();
     }
 
-    public Owner findOwnerById(Integer id) {
+    public Owner findOwnerById(Long id) {
         return ownerDao.findById(id);
     }
 
@@ -36,76 +53,35 @@ public class ClinicService {
         ownerDao.save(owner);
     }
 
-    public void deleteOwner(Owner owner) {
-        ownerDao.delete(owner);
+    public void deleteOwner(Long id) {
+        ownerDao.delete(id);
     }
 
-    // Pet operations
-    public Collection<Pet> findAllPets() {
-        return petDao.findAll();
+    public Pet findPetsByOwnerId(Long ownerId) {
+        return petDao.findByOwnerId(ownerId);
     }
 
-    public Pet findPetById(Integer id) {
-        return petDao.findById(id);
+    public List<PetType> findAllPetTypes() {
+        return petTypeDao.findAll();
+    }
+
+    public List<Specialty> findAllSpecialties() {
+        return specialtyDao.findAll();
+    }
+
+    public List<Vet> findAllVets() {
+        return vetDao.findAll();
     }
 
     public void savePet(Pet pet) {
         petDao.save(pet);
     }
 
-    public void deletePet(Pet pet) {
-        petDao.delete(pet);
-    }
-
-    // Vet operations
-    public Collection<Vet> findAllVets() {
-        return vetDao.findAll();
-    }
-
-    public Vet findVetById(Integer id) {
-        return vetDao.findById(id);
-    }
-
-    public void saveVet(Vet vet) {
-        vetDao.save(vet);
-    }
-
-    // Visit operations
-    public Collection<Visit> findAllVisits() {
-        return visitDao.findAll();
-    }
-
-    public Visit findVisitById(Integer id) {
-        return visitDao.findById(id);
-    }
-
     public void saveVisit(Visit visit) {
         visitDao.save(visit);
     }
 
-    // Pet Type operations
-    public Collection<PetType> findAllPetTypes() {
-        return petTypeDao.findAll();
-    }
-
-    // Setters for dependency injection
-    public void setOwnerDao(OwnerDao ownerDao) {
-        this.ownerDao = ownerDao;
-    }
-
-    public void setPetDao(PetDao petDao) {
-        this.petDao = petDao;
-    }
-
-    public void setVetDao(VetDao vetDao) {
-        this.vetDao = vetDao;
-    }
-
-    public void setVisitDao(VisitDao visitDao) {
-        this.visitDao = visitDao;
-    }
-
-    public void setPetTypeDao(PetTypeDao petTypeDao) {
-        this.petTypeDao = petTypeDao;
+    public List<Visit> findVisitsByPetId(Long petId) {
+        return visitDao.findByPetId(petId);
     }
 }

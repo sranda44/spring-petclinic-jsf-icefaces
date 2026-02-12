@@ -1,0 +1,32 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <title>Create New Owner</title>
+</h:head>
+
+<h:body>
+    <h:form>
+        <h:panelGrid columns="2">
+            <h:outputLabel for="firstName" value="First Name:" />
+            <h:inputText id="firstName" value="#{ownerDetailBean.owner.firstName}" required="true" />
+
+            <h:outputLabel for="lastName" value="Last Name:" />
+            <h:inputText id="lastName" value="#{ownerDetailBean.owner.lastName}" required="true" />
+
+            <h:outputLabel for="address" value="Address:" />
+            <h:inputText id="address" value="#{ownerDetailBean.owner.address}" />
+
+            <h:outputLabel for="city" value="City:" />
+            <h:inputText id="city" value="#{ownerDetailBean.owner.city}" />
+
+            <h:outputLabel for="telephone" value="Telephone:" />
+            <h:inputText id="telephone" value="#{ownerDetailBean.owner.telephone}" required="true" />
+        </h:panelGrid>
+
+        <h:commandButton value="Save" action="#{ownerDetailBean.save}" />
+        <h:commandButton value="Cancel" action="ownerList" />
+    </h:form>
+</h:body>
+</html>

@@ -1,0 +1,35 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/">
+
+<h:head>
+    <title>Pet List</title>
+    <h:outputStylesheet name="css/styles.css"/>
+</h:head>
+
+<h:body>
+    <h:form>
+        <h:panelGrid columns="2">
+            <h:outputLabel value="Pets:" for="petList"/>
+            <h:dataTable id="petList" value="#{petListBean.pets}" var="pet">
+                <h:column>
+                    <f:facet name="header">Name</f:facet>
+                    <h:outputText value="#{pet.name}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Type</f:facet>
+                    <h:outputText value="#{pet.type.name}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Owner</f:facet>
+                    <h:outputText value="#{pet.owner.firstName} #{pet.owner.lastName}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Details</f:facet>
+                    <h:commandLink value="View" action="#{petListBean.viewPet(pet.id)}"/>
+                </h:column>
+            </h:dataTable>
+        </h:panelGrid>
+    </h:form>
+</h:body>
+</html>

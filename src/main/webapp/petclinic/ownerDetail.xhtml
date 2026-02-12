@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <title>Owner Details</title>
+</h:head>
+<h:body>
+    <h:form>
+        <h:panelGrid columns="2">
+            <h:outputLabel for="firstName" value="First Name:" />
+            <h:outputText id="firstName" value="#{ownerDetailBean.owner.firstName}" />
+
+            <h:outputLabel for="lastName" value="Last Name:" />
+            <h:outputText id="lastName" value="#{ownerDetailBean.owner.lastName}" />
+
+            <h:outputLabel for="pets" value="Pets:" />
+            <h:dataTable value="#{ownerDetailBean.owner.pets}" var="pet">
+                <h:column>
+                    <f:facet name="header">Pet Name</f:facet>
+                    <h:outputText value="#{pet.name}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Pet Type</f:facet>
+                    <h:outputText value="#{pet.type.name}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Actions</f:facet>
+                    <h:commandLink value="View" action="#{petDetailBean.viewPet(pet.id)}" />
+                </h:column>
+            </h:dataTable>
+
+            <h:outputLabel for="edit" value=" " />
+            <h:commandButton value="Edit Owner" action="#{ownerDetailBean.editOwner}" />
+        </h:panelGrid>
+    </h:form>
+</h:body>
+</html>
